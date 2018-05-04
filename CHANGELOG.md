@@ -12,3 +12,4 @@ The format is based on [Keep a Changelog] and this project adheres to
 - Changelog, license, readme.
 - Gradle JOSM plugin demo.
 - Batch Circle Building action.
+- Batch Orthogonal Building action.
