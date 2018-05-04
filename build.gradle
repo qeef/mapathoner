@@ -2,19 +2,16 @@ plugins {
   id 'org.openstreetmap.josm' version '0.4.0'
 }
 
-repositories {
-  jcenter()
-}
-
-version = 'git describe --always --dirty'.execute().in.text.trim()
+//version = 'git describe --always --dirty'.execute().in.text.trim()
+version = '0.0.1'
 josm {
   josmCompileVersion = '13576'
   manifest {
-    description = 'The description of my awesome plugin'
-    mainClass = 'org.openstreetmap.josm.plugins.myawesomeplugin.MyAwesomePlugin'
-    minJosmVersion = 1234
-    // author = 'John Doe'
-    // canLoadAtRuntime = true
+    description = 'Some useful tools for HOT and Missing Maps mappers.'
+    mainClass = 'org.openstreetmap.josm.plugins.mapathoner.MapathonerPlugin'
+    minJosmVersion = 12643
+    author = 'Jiri Hubacek'
+    canLoadAtRuntime = true
     // iconPath = 'path/to/my/icon.svg'
     // loadEarly = false
     // loadPriority = 50
