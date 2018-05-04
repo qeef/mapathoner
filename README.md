@@ -27,4 +27,10 @@ This project is developed under [GNU GPLv3 license].
 [OneFlow]: http://endoflineblog.com/oneflow-a-git-branching-model-and-workflow
 [GNU GPLv3 license]: ./LICENSE
 
+# Release
+This is the release process:
+- Create release branch from `master`.
+- Update version in `build.gradle`, generate and update `jar`.
+- Update changelog, tag the version and merge to `master`.
+
 *Keep mapping!*
