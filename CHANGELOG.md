@@ -13,3 +13,4 @@ The format is based on [Keep a Changelog] and this project adheres to
 - Gradle JOSM plugin demo.
 - Batch Circle Building action.
 - Batch Orthogonal Building action.
+- Pick Residential Area action.
