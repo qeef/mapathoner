@@ -14,3 +14,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 - Batch Circle Building action.
 - Batch Orthogonal Building action.
 - Pick Residential Area action.
+- Mapathoner main class.
+
+### Changed
+- Update `build.gradle` with actual project info.
