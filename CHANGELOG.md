@@ -10,3 +10,4 @@ The format is based on [Keep a Changelog] and this project adheres to
 ## Unreleased
 ### Added
 - Changelog, license, readme.
+- Gradle JOSM plugin demo.
