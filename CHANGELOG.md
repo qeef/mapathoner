@@ -11,6 +11,11 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Added
 - Mapathoner package JavaDoc.
 - Hugo template.
+- Hugo Coder theme template.
+- Home, Usage, and Credits pages.
+
+### Changed
+- Update readme documentation.
 
 ## [0.1.0] - 2018-05-05
 ### Added
