@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mapathoner</title>
-    <link>http://qeef.github.io/mapathoner/</link>
+    <link>https://qeef.github.io/mapathoner/</link>
     <description>Recent content on Mapathoner</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 06 May 2018 11:40:10 +0200</lastBuildDate>
     
-	<atom:link href="http://qeef.github.io/mapathoner/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://qeef.github.io/mapathoner/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Credits</title>
-      <link>http://qeef.github.io/mapathoner/credits/</link>
+      <link>https://qeef.github.io/mapathoner/credits/</link>
       <pubDate>Sun, 06 May 2018 11:27:40 +0200</pubDate>
       
-      <guid>http://qeef.github.io/mapathoner/credits/</guid>
+      <guid>https://qeef.github.io/mapathoner/credits/</guid>
       <description>And what about the history of the plugin? It evolved from JOSM scripts.
 Easy buildings - autumn 2016 Credits: It&amp;rsquo;s me.
 This was the first attempt to deal with my laziness. More than a few clicks and one shortcut keypress is no way. BuildingsTools make the job for square buildings but not for circle (and I do not copy + resize them because for me it&amp;rsquo;s too heavy too) nor for residential areas.</description>
@@ -24,10 +24,10 @@ This was the first attempt to deal with my laziness. More than a few clicks and 
     
     <item>
       <title>Usage</title>
-      <link>http://qeef.github.io/mapathoner/usage/</link>
+      <link>https://qeef.github.io/mapathoner/usage/</link>
       <pubDate>Sun, 06 May 2018 11:27:29 +0200</pubDate>
       
-      <guid>http://qeef.github.io/mapathoner/usage/</guid>
+      <guid>https://qeef.github.io/mapathoner/usage/</guid>
       <description>How to install  Launch the Preferences dialog. Select the tab Plugins. Click on to download the list of available plugins. Tick the checkbox for mapathoner. Click on OK.  See the JOSM wiki for more information.
 How to use Batch Circle Building  Click two nodes on building&amp;rsquo;s diameter (it creates a way). Continue clicking another two nodes on the next building&amp;rsquo;s diameter (it prolongs the current way). DO NOT FINISH THE WAY!</description>
     </item>
