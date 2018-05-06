@@ -1,5 +1,5 @@
 # Comment `baseURL` for development
-baseURL = "http://qeef.github.io/mapathoner/"
+baseURL = "https://qeef.github.io/mapathoner/"
 languageCode = "en-us"
 title = "Mapathoner"
 
