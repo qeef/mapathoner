@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Keep a Changelog]: http://keepachangelog.com/
 [Semantic Versioning]: http://semver.org/
 
-## Unreleased
+## [Unreleased]
+
+## [0.2.0] - 2018-05-06
 ### Added
 - Mapathoner package JavaDoc.
 - Hugo template.
@@ -17,7 +19,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Changed
 - Update readme documentation.
 
-## [0.1.0] - 2018-05-05
+## 0.1.0 - 2018-05-05
 ### Added
 - Changelog, license, readme.
 - Gradle JOSM plugin demo.
@@ -28,3 +30,6 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 ### Changed
 - Update `build.gradle` with actual project info.
+
+[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/qeef/mapathoner/compare/v0.1.0...v0.2.0
