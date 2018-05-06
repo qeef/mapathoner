@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Semantic Versioning]: http://semver.org/
 
 ## [Unreleased]
+
+## [0.2.0] - 2018-05-06
 ### Added
 - Mapathoner package JavaDoc.
 - Hugo template.
@@ -29,4 +31,5 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Changed
 - Update `build.gradle` with actual project info.
 
-[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/qeef/mapathoner/compare/v0.1.0...v0.2.0
