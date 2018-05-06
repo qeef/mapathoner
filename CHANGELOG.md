@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog] and this project adheres to
 
 ## [Unreleased]
 
+## [0.2.1] - 2018-05-06
+### Fixed
+- Https in baseURL link.
+
 ## [0.2.0] - 2018-05-06
 ### Added
 - Mapathoner package JavaDoc.
@@ -31,5 +35,6 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Changed
 - Update `build.gradle` with actual project info.
 
-[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/qeef/mapathoner/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/qeef/mapathoner/compare/v0.1.0...v0.2.0
