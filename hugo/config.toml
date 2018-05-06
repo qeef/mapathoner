@@ -1,0 +1,26 @@
+# Comment `baseURL` for development
+baseURL = "http://qeef.github.io/mapathoner/"
+languageCode = "en-us"
+title = "Mapathoner"
+
+theme = "hugo-coder"
+
+publishDir = "../docs/"
+
+[params]
+    author = "Jiri Hubacek"
+    description = "JOSM plugin with some useful tools for HOT and Missing Maps mappers"
+    keywords = "JOSM plugin,JOSM,HOT,Missing Maps,mapathon,OSM,Open Street Map"
+
+[[menu.main]]
+    name = "Usage"
+    url = "/usage/"
+    weight = 1
+[[menu.main]]
+    name = "JavaDoc"
+    url = "/javadoc/"
+    weight = 2
+[[menu.main]]
+    name = "Credits"
+    url = "/credits/"
+    weight = 3
