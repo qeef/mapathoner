@@ -97,6 +97,15 @@ public final class BatchCircleBuildingAction extends JosmAction
         }
 
         existingWay = ways.get(0);
+        if (existingWay.getNodesCount() < 2) {
+            new Notification(
+                    tr("Please create way with even number of nodes."))
+                    .setIcon(JOptionPane.INFORMATION_MESSAGE)
+                    .setDuration(Notification.TIME_LONG)
+                    .show();
+            return;
+        }
+
         for (Node n : existingWay.getNodes()) {
             if (!nodes.contains(n)) {
                 nodes.add(n);
