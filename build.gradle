@@ -3,7 +3,7 @@ plugins {
 }
 
 //version = 'git describe --always --dirty'.execute().in.text.trim()
-version = '0.2.0'
+version = '0.2.3'
 josm {
   josmCompileVersion = '13576'
   manifest {
