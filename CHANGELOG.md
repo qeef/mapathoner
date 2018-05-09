@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Semantic Versioning]: http://semver.org/
 
 ## [Unreleased]
+### Fixed
+- Undo/Redo for Pick Residential Area action.
 
 ## [0.2.3] - 2018-05-08
 ### Fixed

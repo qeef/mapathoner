@@ -9,7 +9,10 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -17,6 +20,8 @@ import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.command.AddCommand;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
+import org.openstreetmap.josm.command.Command;
+import org.openstreetmap.josm.command.SequenceCommand;
 import org.openstreetmap.josm.data.coor.EastNorth;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.Node;
@@ -101,17 +106,25 @@ public final class PickResidentialAreaAction extends JosmAction
         }
 
         nodes = graham_scan(nodes);
+        Map<String, String> tag_lr = new HashMap<String, String>();
+        Collection<OsmPrimitive> rareas = new LinkedList<OsmPrimitive>();
+        Collection<Command> cmds = new LinkedList<Command>();
+
         for (Node n: nodes) {
-            MainApplication.undoRedo.add(new AddCommand(ds, n));
+            cmds.add(new AddCommand(ds, n));
         }
 
         nodes.add(nodes.get(0));
         Way rarea = new Way();
         rarea.setNodes(nodes);
-        MainApplication.undoRedo.add(new AddCommand(ds, rarea));
+        cmds.add(new AddCommand(ds, rarea));
 
-        MainApplication.undoRedo.add(
-                new ChangePropertyCommand(rarea, "landuse", "residential"));
+        rareas.add(rarea);
+        tag_lr.put("landuse", "residential");
+        cmds.add(new ChangePropertyCommand(ds, rareas, tag_lr));
+
+        MainApplication.undoRedo.add(new SequenceCommand(
+                                tr("Pick Residential Area"), cmds));
         ds.clearSelection();
         }
 
