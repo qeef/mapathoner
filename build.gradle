@@ -10,7 +10,7 @@ josm {
     description = 'Some useful tools for HOT and Missing Maps mappers.'
     mainClass = 'org.openstreetmap.josm.plugins.mapathoner.MapathonerPlugin'
     minJosmVersion = 12643
-    author = 'Jiri Hubacek'
+    author = 'qeef'
     canLoadAtRuntime = true
     // iconPath = 'path/to/my/icon.svg'
     // loadEarly = false

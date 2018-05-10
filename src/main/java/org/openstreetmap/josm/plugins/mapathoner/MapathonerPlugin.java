@@ -18,7 +18,7 @@ import org.openstreetmap.josm.plugins.mapathoner.PickResidentialAreaAction;
 /**
  * Mapathoner - some useful tools for HOT and Missing Maps mappers.
  *
- * @author Jiri Hubacek
+ * @author qeef
  * @since xxx
  */
 public class MapathonerPlugin extends Plugin

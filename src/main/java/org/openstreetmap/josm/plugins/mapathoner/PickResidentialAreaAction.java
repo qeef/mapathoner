@@ -52,7 +52,7 @@ import org.openstreetmap.josm.tools.Shortcut;
  * <li>Useful for HOT and Missing Maps mappers.
  * </ul>
  *
- * @author Jiri Hubacek
+ * @author qeef
  * @since xxx
  */
 

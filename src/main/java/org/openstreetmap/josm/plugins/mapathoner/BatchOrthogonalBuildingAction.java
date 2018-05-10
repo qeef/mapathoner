@@ -55,7 +55,7 @@ import org.openstreetmap.josm.tools.Shortcut;
  * <li>This action uses <code>OrthogonalizeAction</code>.
  * </ul>
  *
- * @author Jiri Hubacek
+ * @author qeef
  * @since xxx
  */
 
