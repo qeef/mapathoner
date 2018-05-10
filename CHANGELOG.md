@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Fixed
 - Undo/Redo for Pick Residential Area action.
 - Undo/Redo for Batch Orthogonalize Building action.
+- Undo/Redo for Batch Circle Building action.
 
 ## [0.2.3] - 2018-05-08
 ### Fixed

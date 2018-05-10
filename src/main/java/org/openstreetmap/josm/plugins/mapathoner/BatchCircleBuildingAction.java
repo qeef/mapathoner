@@ -8,14 +8,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.actions.CreateCircleAction;
 import org.openstreetmap.josm.actions.JosmAction;
+import org.openstreetmap.josm.command.AddCommand;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
+import org.openstreetmap.josm.command.Command;
+import org.openstreetmap.josm.command.DeleteCommand;
+import org.openstreetmap.josm.command.RemoveNodesCommand;
+import org.openstreetmap.josm.command.SequenceCommand;
+import org.openstreetmap.josm.data.coor.EastNorth;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.Node;
 import org.openstreetmap.josm.data.osm.OsmPrimitive;
@@ -80,10 +89,8 @@ public final class BatchCircleBuildingAction extends JosmAction
             return;
 
         Collection<OsmPrimitive> sel = ds.getSelected();
-        List<Node> nodes = new ArrayList<Node>();
         List<Way> ways = OsmPrimitive.getFilteredList(sel, Way.class);
 
-        CreateCircleAction createCircle = new CreateCircleAction();
         Way existingWay = null;
         int i;
 
@@ -106,35 +113,53 @@ public final class BatchCircleBuildingAction extends JosmAction
             return;
         }
 
-        for (Node n : existingWay.getNodes()) {
-            if (!nodes.contains(n)) {
-                nodes.add(n);
+        List<Node> nodes = existingWay.getNodes();
+        List<EastNorth> ens = new ArrayList<EastNorth>();
+        Map<String, String> tag_by = new HashMap<String, String>();
+        tag_by.put("building", "yes");
+        Collection<Way> cbuildings = new LinkedList<Way>();
+        Collection<Command> cmds = new LinkedList<Command>();
+        for (Node n : nodes) {
+            ens.add(n.getEastNorth());
+        }
+
+        cmds.add(new RemoveNodesCommand(existingWay, nodes));
+        cmds.add(new DeleteCommand(ds, existingWay));
+        for (Node n: nodes) {
+            cmds.add(new DeleteCommand(ds, n));
+        }
+
+        if (ens.size() % 2 != 0) {
+            ens.remove(ens.size() - 1);
+        }
+
+        for (i = 0; i < ens.size() - 1; i += 2) {
+            List<Node> cb_nodes = new ArrayList<Node>();
+            Way cb_way = new Way();
+
+            cb_nodes.add(new Node(ens.get(i)));
+            cb_nodes.add(new Node(ens.get(i + 1)));
+
+            for (Node n: cb_nodes) {
+                cmds.add(new AddCommand(ds, n));
             }
+
+            cb_nodes.add(cb_nodes.get(0));
+            cb_way.setNodes(cb_nodes);
+            cmds.add(new AddCommand(ds, cb_way));
+
+            cbuildings.add(cb_way);
         }
 
-        if (nodes.size() % 2 != 0) {
-            ds.removePrimitive(nodes.get(nodes.size() - 1));
-            nodes.remove(nodes.size() - 1);
-        }
+        cmds.add(new ChangePropertyCommand(ds, cbuildings, tag_by));
+        MainApplication.undoRedo.add(new SequenceCommand(
+                    tr("Batch Circle Building"), cmds));
 
-        ds.clearSelection();
-        ds.removePrimitive(existingWay);
-
-        for (i = 0; i < nodes.size() - 1; i += 2) {
-            ds.addSelected(nodes.get(i));
-            ds.addSelected(nodes.get(i + 1));
-            createCircle.actionPerformed(null);
+        CreateCircleAction cc = new CreateCircleAction();
+        for (Way w: cbuildings) {
             ds.clearSelection();
-
-            for (Way w: ds.getWays()) {
-                if (w.getNodes().contains(nodes.get(i))) {
-                    ds.addSelected(w);
-                    MainApplication.undoRedo.add(
-                            new ChangePropertyCommand(w, "building", "yes"));
-                    break;
-                }
-            }
-
+            ds.addSelected(w);
+            cc.actionPerformed(null);
             ds.clearSelection();
         }
     }
