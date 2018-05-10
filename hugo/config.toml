@@ -8,7 +8,7 @@ theme = "hugo-coder"
 publishDir = "../docs/"
 
 [params]
-    author = "Jiri Hubacek"
+    author = "qeef"
     description = "JOSM plugin with some useful tools for HOT and Missing Maps mappers"
     keywords = "JOSM plugin,JOSM,HOT,Missing Maps,mapathon,OSM,Open Street Map"
 
