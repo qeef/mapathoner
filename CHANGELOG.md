@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog] and this project adheres to
 [Semantic Versioning]: http://semver.org/
 
 ## [Unreleased]
+
+## [0.2.4] - 2018-05-10
 ### Fixed
 - Undo/Redo for Pick Residential Area action.
 - Undo/Redo for Batch Orthogonalize Building action.
@@ -47,7 +49,8 @@ The format is based on [Keep a Changelog] and this project adheres to
 ### Changed
 - Update `build.gradle` with actual project info.
 
-[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/qeef/mapathoner/compare/v0.2.4...HEAD
+[0.2.4]: https://github.com/qeef/mapathoner/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/qeef/mapathoner/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/qeef/mapathoner/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/qeef/mapathoner/compare/v0.2.0...v0.2.1
