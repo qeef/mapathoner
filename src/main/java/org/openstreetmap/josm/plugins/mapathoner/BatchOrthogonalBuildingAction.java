@@ -8,7 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -17,6 +20,10 @@ import org.openstreetmap.josm.actions.JosmAction;
 import org.openstreetmap.josm.actions.OrthogonalizeAction;
 import org.openstreetmap.josm.command.AddCommand;
 import org.openstreetmap.josm.command.ChangePropertyCommand;
+import org.openstreetmap.josm.command.Command;
+import org.openstreetmap.josm.command.DeleteCommand;
+import org.openstreetmap.josm.command.RemoveNodesCommand;
+import org.openstreetmap.josm.command.SequenceCommand;
 import org.openstreetmap.josm.data.coor.EastNorth;
 import org.openstreetmap.josm.data.osm.DataSet;
 import org.openstreetmap.josm.data.osm.Node;
@@ -82,10 +89,8 @@ public final class BatchOrthogonalBuildingAction extends JosmAction
             return;
 
         Collection<OsmPrimitive> sel = ds.getSelected();
-        List<Node> nodes = new ArrayList<Node>();
         List<Way> ways = OsmPrimitive.getFilteredList(sel, Way.class);
 
-        OrthogonalizeAction orthogonalize = new OrthogonalizeAction();
         Way existingWay = null;
         int i;
 
@@ -108,58 +113,65 @@ public final class BatchOrthogonalBuildingAction extends JosmAction
             return;
         }
 
-        for (Node n : existingWay.getNodes()) {
-            if (!nodes.contains(n)) {
-                nodes.add(n);
-            }
+        List<Node> nodes = existingWay.getNodes();
+        List<EastNorth> ens = new ArrayList<EastNorth>();
+        Map<String, String> tag_by = new HashMap<String, String>();
+        tag_by.put("building", "yes");
+        Collection<Way> obuildings = new LinkedList<Way>();
+        Collection<Command> cmds = new LinkedList<Command>();
+        for (Node n : nodes) {
+            ens.add(n.getEastNorth());
         }
 
-        if (nodes.size() % 3 != 0) {
-            ds.removePrimitive(nodes.get(nodes.size() - 1));
-            nodes.remove(nodes.size() - 1);
-        }
-        if (nodes.size() % 3 != 0) {
-            ds.removePrimitive(nodes.get(nodes.size() - 1));
-            nodes.remove(nodes.size() - 1);
+        cmds.add(new RemoveNodesCommand(existingWay, nodes));
+        cmds.add(new DeleteCommand(ds, existingWay));
+        for (Node n : nodes) {
+            cmds.add(new DeleteCommand(ds, n));
         }
 
-        ds.clearSelection();
-        ds.removePrimitive(existingWay);
+        if (ens.size() % 3 != 0) {
+            ens.remove(ens.size() - 1);
+        }
+        if (ens.size() % 3 != 0) {
+            ens.remove(ens.size() - 1);
+        }
 
-        for (i = 0; i < nodes.size() - 2; i += 3) {
+        for (i = 0; i < ens.size() - 2; i += 3) {
             List<Node> ob_nodes = new ArrayList<Node>();
             Way ob_way = new Way();
 
-            ob_nodes.add(nodes.get(i));
-            ob_nodes.add(nodes.get(i + 1));
-            ob_nodes.add(nodes.get(i + 2));
-
-            EastNorth n0 = ob_nodes.get(0).getEastNorth();
-            EastNorth n1 = ob_nodes.get(1).getEastNorth();
-            EastNorth n2 = ob_nodes.get(2).getEastNorth();
-
+            EastNorth n0 = ens.get(i);
+            EastNorth n1 = ens.get(i + 1);
+            EastNorth n2 = ens.get(i + 2);
             EastNorth n3 = new EastNorth(n0.east() + n2.east() - n1.east(),
                     n0.north() + n2.north() - n1.north());
+
+            ob_nodes.add(new Node(n0));
+            ob_nodes.add(new Node(n1));
+            ob_nodes.add(new Node(n2));
             ob_nodes.add(new Node(n3));
-            ob_nodes.add(ob_nodes.get(0));
-            ob_way.setNodes(ob_nodes);
 
-            MainApplication.undoRedo.add(new AddCommand(ds, ob_nodes.get(3)));
-            MainApplication.undoRedo.add(new AddCommand(ds, ob_way));
-
-            ds.clearSelection();
-
-            for (Way w: ds.getWays()) {
-                if (w.getNodes().contains(nodes.get(i))) {
-                    ds.addSelected(w);
-                    orthogonalize.actionPerformed(null);
-                    MainApplication.undoRedo.add(
-                            new ChangePropertyCommand(w, "building", "yes"));
-                    break;
-                }
+            for (Node n: ob_nodes) {
+                cmds.add(new AddCommand(ds, n));
             }
 
-            ds.clearSelection();
+            ob_nodes.add(ob_nodes.get(0));
+            ob_way.setNodes(ob_nodes);
+            cmds.add(new AddCommand(ds, ob_way));
+
+            obuildings.add(ob_way);
+        }
+
+        cmds.add(new ChangePropertyCommand(ds, obuildings, tag_by));
+        MainApplication.undoRedo.add(new SequenceCommand(
+                    tr("Batch Orthogonal Building"), cmds));
+
+        OrthogonalizeAction oa = new OrthogonalizeAction();
+        for (Way w: obuildings) {
+                ds.clearSelection();
+                ds.addSelected(w);
+                oa.actionPerformed(null);
+                ds.clearSelection();
         }
     }
 }
