@@ -1,15 +1,15 @@
 plugins {
-  id 'org.openstreetmap.josm' version '0.4.0'
+  id 'org.openstreetmap.josm' version '0.4.6'
 }
 
-//version = 'git describe --always --dirty'.execute().in.text.trim()
-version = '0.2.4'
+version = '0.2.5'
+
 josm {
-  josmCompileVersion = '13576'
+  josmCompileVersion = '13878'
   manifest {
     description = 'Some useful tools for HOT and Missing Maps mappers.'
     mainClass = 'org.openstreetmap.josm.plugins.mapathoner.MapathonerPlugin'
-    minJosmVersion = 12643
+    minJosmVersion = 12726
     author = 'qeef'
     canLoadAtRuntime = true
     // iconPath = 'path/to/my/icon.svg'
@@ -20,8 +20,9 @@ josm {
     // oldVersionDownloadLink 123, 'v1.2.0', new URL('https://example.org/download/v1.2.0/MyAwesomePlugin.jar')
     // oldVersionDownloadLink  42, 'v1.0.0', new URL('https://example.org/download/v1.0.0/MyAwesomePlugin.jar')
   }
-  // i18n {
+  i18n {
+    pathTransformer = getGithubPathTransformer('qeef/mapathoner')
   //   bugReportEmail = 'me@example.com'
   //   copyrightHolder = 'John Doe'
-  // }
+  }
 }
