@@ -2,7 +2,7 @@ plugins {
   id 'org.openstreetmap.josm' version '0.4.6'
 }
 
-version = 'git describe --always --dirty --tags'.execute().in.text.trim()
+version = '0.2.5'
 
 josm {
   josmCompileVersion = '13878'
